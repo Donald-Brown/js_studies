@@ -1,3 +1,6 @@
 # A reference to js learning
-- stacks
-- sets
+- Stacks
+- Sets
+- Queue
+- Binary Seach Tree
+- 
