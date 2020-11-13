@@ -20,7 +20,7 @@ class BST {
     }else{
       const searchTree = function(node) {
         if(data < node.data) {
-          if(node.left = null) {
+          if(node.left === null) {
             node.left = new Node(data);
             return;
           }else if(node.left !== null) {
@@ -84,20 +84,20 @@ class BST {
   }
   remove(data) {
     const removeNode = function(node, data) {
-      if (node == null) {
+      if (node === null) {
         return null;
       }
-      if (data == node.data) {
+      if (data === node.data) {
         //* node has no children
-        if (node.left == null && node.right == null) {
+        if (node.left === null && node.right === null) {
           return null;
         }
         //* node has no left child
-        if (node.left == null) {
+        if (node.left === null) {
           return node.right;
         }
         //* node has no right child
-        if(node.right == null) {
+        if(node.right === null) {
           return node.left;
         }
         //* node has two children
@@ -122,7 +122,7 @@ class BST {
     return (this.findMinHeight() >= this.findMaxHeight() - 1);
   }
   findMinHeight(node = this.root) {
-    if(node == null) {
+    if(node === null) {
       return -1;
     }
     let left = this.findMinHeight(node.left);
@@ -134,7 +134,7 @@ class BST {
     }
   }
   findMaxHeight(node = this.root) {
-    if (node == null) {
+    if (node === null) {
       return - 1;
     }
     let left = this.findMaxHeight(node.left);
@@ -146,7 +146,7 @@ class BST {
     }
   }
   inOrder() {
-    if(this.root == null) {
+    if(this.root === null) {
       return null;
     } else {
       let result = new Array();
@@ -160,7 +160,7 @@ class BST {
     }
   }
   preOrder() {
-    if (this.root == null) {
+    if (this.root === null) {
       return null;
     } else {
       let result = new Array();
@@ -174,9 +174,63 @@ class BST {
     }
   }
   postOrder() {
-
+    if (this.root === null){
+      return null;
+    } else {
+      let result = new Array();
+      function traversePostOrder(node) {
+        node.left && traversePostOrder(node.left);
+        node.right && traversePostOrder(node.right);
+        result.push(node.data);
+      }
+    }
   }
   levelOrder() {
-    
+    let result = [];
+    let Q = []; 
+    if (this.root !== null) {
+      Q.push(this.root);
+      while(Q.length > 0) {
+        let node = Q.shift();
+        result.push(node.data);
+        if (node.left !== null) {
+          Q.push(node.left);
+        }
+        if (node.right !== null) {
+          Q.push(node.right);
+        }
+      }
+      return result;
+    }else {
+      return null;
+    }
   }
+
 }
+
+const bst = new BST();
+
+bst.add(13);
+bst.add(3);
+bst.add(21);
+bst.add(5);
+bst.add(2);
+bst.add(34);
+bst.add(10);
+bst.add(6);
+bst.add(15);
+bst.add(14);
+
+console.log(bst);
+
+console.log(bst.findMin());
+
+console.log(bst.findMax());
+bst.remove(34);
+console.log(bst.findMax());
+
+console.log(bst.find(13));
+console.log(bst.find(4));
+
+console.log(bst.isPresent(12));
+console.log(bst.isPresent(15));
