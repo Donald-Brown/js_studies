@@ -146,7 +146,7 @@ class BinarySearchTree {
     if (this.root === null) {
       return null;
     } else {
-      let result = new Array();
+      let result = [];
       function traverseInOrder(node) {
         node.left && traverseInOrder(node.left);
         result.push(node.data);
@@ -157,13 +157,52 @@ class BinarySearchTree {
     }
   }
   preOrder() {
-
+    if (this.root === null) {
+      return null;
+    } else {
+      let result = [];
+      function traversePreOrder(node) {
+        result.push(node.data);
+        node.left && traversePreOrder(node.left);
+        node.right && traversePreOrder(node.right)
+      }
+      traversePreOrder(this.root);
+      return result;
+    }
   }
   postOrder() {
-
+    if (this.root === null) {
+      return null;
+    } else { 
+      let result = [];
+      function traversePostOrder(node) {
+        node.left && traversePostOrder(node.left);
+        node.right && traversePostOrder(node.right);
+        result.push(node.data);
+      }
+      traversePostOrder(this.root);
+      return result;
+    }
   }
   levelOrder() {
-
+    let result = [];
+    let Q = [];
+    if (this.root !== null) {
+      Q.push(this.root);
+      while (Q.length > 0) {
+        let node = Q.shift();
+        result.push(node.data);
+        if (node.left !== null) {
+          Q.push(node.left);
+        }
+        if (node.right !== null) {
+          Q.push(node.right);
+        }
+      }
+      return result;
+    } else {
+      return null
+    }
   }
 }
 
@@ -221,7 +260,9 @@ bst.add(20);
 // console.log(bst.findMaxHeight());
 // console.log(bst.isBalanced());
 console.log(bst.inOrder());
-
+console.log(bst.preOrder());
+console.log(bst.postOrder());
+console.log(bst.levelOrder());
 
 
 // console.log('space');

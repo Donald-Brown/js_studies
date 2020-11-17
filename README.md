@@ -3,4 +3,4 @@
 - Sets
 - Queue
 - Binary Seach Tree
-- 
+- Hash Tables
