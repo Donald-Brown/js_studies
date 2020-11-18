@@ -1,6 +1,6 @@
-//* Hash Table
+//* simple Hash table in JavaScript
 
-let hash = (string, max) => {
+let hash = function(string, max) {
   let hash = 0;
   for (let i = 0; i < string.length; i++) {
     hash += string.charCodeAt(i);
@@ -10,35 +10,34 @@ let hash = (string, max) => {
 
 let HashTable = function() {
   let storage = [];
-  const storageLimit = 14;
+  const STORAGELIMIT = 20;
 
+  //* utility function for example
   this.print = function() {
     console.log(storage);
   }
 
   this.add = function(key, value) {
-    let index = hash(key, storageLimit);
+    let index = hash(key, STORAGELIMIT);
     if (storage[index] === undefined) {
-      storage[index] = [
-        [key, value]
-      ];
+      storage[index] = [ [key, value] ];
     } else {
-      let inserted = false;
       for (let i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          storage[index][i][0] === value;
+        let inserted = false;
+        if (storage[index][1][0] === key) {
+          storage[index][i][1] = value;
           inserted = true;
         }
       }
       if (inserted === false) {
-        storage[index].push([key, value]);
+        storage[index].push([ key, value ]);
       }
     }
-  } 
+  }
 
   this.remove = function(key) {
-    let index = hash(key, storageLimit);
-    if (storage[index].length === 1 && storage[index][0][0] === key) {
+    let index = hash(key, STORAGELIMIT);
+    if (storage[index].length === 1 && storage[index][0] === key) {
       delete storage[index];
     } else {
       for (let i = 0; i < storage[index].length; i++) {
@@ -50,8 +49,8 @@ let HashTable = function() {
   }
 
   this.lookup = function(key) {
-    let index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
+    let index = hash(key, STORAGELIMIT);
+    if (storage[index] === undefined){
       return undefined;
     } else {
       for (let i = 0; i < storage[index].length; i++) {
@@ -63,12 +62,18 @@ let HashTable = function() {
   }
 }
 
-console.log(hash('donnie', 10));
+let hs = new HashTable();
 
-let ht = new HashTable();
-ht.add('donnie', 'person');
-ht.add('snoopy', 'dog');
-ht.add('socks', 'cat');
-ht.add('tux', 'penquin');
-console.log(ht.lookup('socks'));
-ht.print();
+hs.add('person', 'donnie');
+hs.add('mom', 'robin');
+hs.add('dad', 'don');
+hs.add('nephew', 'bailey');
+hs.add('neighbor', 'jim');
+
+hs.print();
+
+//hs.remove('neighbor');
+hs.print();
+
+console.log(hs.lookup('nephew'));
+
