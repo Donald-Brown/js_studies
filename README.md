@@ -7,3 +7,4 @@
 - Binary Seach Tree
 - Hash Tables
 - Linked list
+- Trie
