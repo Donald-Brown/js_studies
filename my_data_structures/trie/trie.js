@@ -54,9 +54,24 @@ let Trie = function() {
   };
 
   this.print = function() {
-    
-  }
-}
+    let words = [];
+    let search = function(node, string){
+      if (node.keys.size !== 0) {
+        for (let letter of node.keys.keys()) {
+          search(node.keys.get(letter), string.concat(letter));
+        };
+        if (node.isEnd()) {
+          words.push(string);
+        };
+      } else {
+        string.length > 0 ? words.push(string) : undefined;
+        return;;
+      };
+    };
+    search(this.root, new String());
+    return words.length > 0 ? words : null;
+  };
+};
 
 
 // let testNode = new Node();
@@ -70,3 +85,4 @@ myTrie.add('batt');
 console.log(myTrie.isWord('bat'));
 console.log(myTrie.isWord('batt'));
 console.log(myTrie.isWord('battt'));
+console.log(myTrie.print());
