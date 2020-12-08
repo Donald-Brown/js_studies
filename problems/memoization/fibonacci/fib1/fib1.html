@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css"
+      integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ=="
+      crossorigin="anonymous"
+    />
     <title>Fibonacci 1</title>
   </head>
   <body>
@@ -12,7 +17,10 @@
       Write a function `fib(n)` that takes in a number as an argument. The
       function should return the n-th number of the Fibonacci sequence.
     </p>
-    <p>The first and second number of the sequence is one. To generate the second number of the sequence, we sum the previous two.</p>
+    <p>
+      The first and second number of the sequence is one. To generate the second
+      number of the sequence, we sum the previous two.
+    </p>
     <pre><code class="lang-js">
 n:      1, 2, 3, 4, 5, 6,  7,  8,  9, ...
 fib(n): 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
@@ -27,9 +35,31 @@ const fib = (n) => {
 };
 
 fib(7);
+//console.log(fib(50)); takes forever, unacceptable big O of time
     </code></pre>
     <div class="img-container">
-      <img src="images/recursive_fib_tree.png" alt="recursive fibonacci tree">
+      <img src="images/recursive_fib_tree.png" alt="recursive fibonacci tree" />
+    </div>
+    <pre><code class="lang-js">
+//* memoization to solve the problem with a reasonable time complexity
+//* JS object - keys will be arg to the func., value will be the return value
+const fib2 = (n, memo = {}) => {
+  if (n in memo) return memo[n]; //? check to see if n is in memo
+  if (n <= 2) return 1;
+  memo[n] = fib2(n - 1, memo) + fib2(n - 2, memo); //? store result in memo obj
+  return memo[n];
+};
+console.log(fib2(7));
+console.log(fib2(8));
+console.log(fib2(6));
+console.log(fib2(50)); 
+    </code></pre>
+    <div class="img-container">
+      <img
+        src="images/memoized_tree.png"
+        alt="example of memoization tree"
+        width="800"
+      />
     </div>
 
     <script
