@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="How to solve Fibonacci">
+  <meta name="keywords" content="JavaScript, Fibonacci, memoization, dynamic, dynamic programming, big o">
+  <meta name="author" content="Donald Brown">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-coy.min.css">
+  <link rel="stylesheet" href="fibonacci.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solving Fibonacci - Memoization</title>
+</head>
+  <body>
+    <h1>Solving Fibonacci with an acceptable time complexity.</h1>
+    <p>We must first look at the problem visually</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Fibonacci_Tree_5.svg" alt="fibonacci tree">
+    <p>The image shows that fib of 5 is the sum of fib of 4 and fib of 3. We can also see that fib of three shows up multiple times in this tree. If the input where much larger fib of larger numbers would also have multiples. So, we can cut the time complexity of this problem by placing this recuring fibs in a memo object. This is known as memoization. Please examine the following code.</p>
+    <pre><code class="lang-js">
+const fib = (n, memo = {}) => {
+    if (n in memo) return memo[n];
+    if (n <= 2) return 1;
+    memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+    return memo[n];
+};
+    
+    </code></pre>
+    
+    <label for="fibInput">Please enter a fibonacci index to see the result.</label>
+    <input type="text" id="fibInput">
+    
+    <label for="button">&nbsp;</label>
+    <input type="button" value="Calculate" id="button">
+    
+    <label for="result">Result</label>
+    <input type="text" disabled id="result">
+    
+    <div id="displayDiv"></div>
+    
+    <footer>
+        <p>by: Donald Brown</p>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="fibonacci.js"></script>
+  </body>
+</html>
