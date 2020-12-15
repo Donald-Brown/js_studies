@@ -5,14 +5,22 @@
   <meta name="description" content="How to solve Fibonacci">
   <meta name="keywords" content="JavaScript, Fibonacci, memoization, dynamic, dynamic programming, big o">
   <meta name="author" content="Donald Brown">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-coy.min.css">
   <link rel="stylesheet" href="fibonacci.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solving Fibonacci - Memoization</title>
 </head>
   <body>
     <h1>Solving Fibonacci with an acceptable time complexity.</h1>
+    <p>
+      Write a function `fib(n)` that takes in a number as an argument. The
+      function should return the n-th number of the Fibonacci sequence.
+    </p>
+    <p>
+      The first and second number of the sequence is one. To generate the second
+      number of the sequence, we sum the previous two.
+    </p>
     <p>We must first look at the problem visually</p>
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Fibonacci_Tree_5.svg" alt="fibonacci tree">
     <p>The image shows that fib of 5 is the sum of fib of 4 and fib of 3. We can also see that fib of three shows up multiple times in this tree. If the input where much larger fib of larger numbers would also have multiples. So, we can cut the time complexity of this problem by placing this recuring fibs in a memo object. This is known as memoization. Please examine the following code.</p>

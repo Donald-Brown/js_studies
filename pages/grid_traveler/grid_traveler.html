@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="How to Grid Traveler">
+  <meta name="keywords" content="JavaScript, Grid Traveler, memoization, dynamic, dynamic programming, big o">
+  <meta name="author" content="Donald Brown">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-coy.min.css">
+  <link rel="stylesheet" href="gird_traveler.css">
+  <title>Solving Grid Traveler - Memoization</title>
+</head>
+<body>
+  <h1>Sovling Grid Traveler with an acceptable time complexity.</h1>
+  <p>
+    Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
+  </p>
+  <p>
+    In how many ways can you travel to the goal on a grid with dimensions m * n?
+  </p>
+  <p>Write a funtion `gridTraveler(m, n)` that calculates this.</p>
+  <p>Again the best way to see this problem is to draw it out</p>
+  <img src="images/grid_traveler.png" alt="grid traveler tree">
+  <pre><code class="lang-js">
+const gridTraveler = function (m, n, memo = {}) {
+  let key = m + "," + n;
+  if (key in memo) return memo[key];
+
+  if (m === 1 && n === 1) return 1;
+  if (m === 0 || n === 0) return 0;
+
+  memo[key] = gridTraveler(m - 1, n, memo) + gridTraveler(m, n - 1, memo);
+  return memo[key];
+};
+
+console.log(gridTraveler(3, 3));   // 6
+console.log(gridTraveler(30, 30)); // 30067266499541040
+  </code></pre>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+  <script src="grid_traveler.js"></script>
+</body>
+</html>

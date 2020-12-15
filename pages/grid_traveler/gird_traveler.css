@@ -17,6 +17,11 @@ input {
   margin-bottom: 0.5em;
 }
 
+img {
+  display: block;
+  margin: 0 auto;
+}
+
 label {
   width: 340px;
   float: left;

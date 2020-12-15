@@ -8,6 +8,7 @@ const canSum = (targetSum, numbers) => {
 
   for (let num of numbers) {
     const remainder = targetSum - num;
+    //return canSum(remainder, numbers); // doesn't work
     if (canSum(remainder, numbers) === true) {
       return true;
     }
@@ -21,7 +22,6 @@ console.log(canSum(7, [2, 4])); // false
 console.log(canSum(8, [2, 3, 5])); // true
 console.log(canSum(-7, [2, 4])); // false
 // console.log(canSum(300, [7, 14])); // false however to large for this implementation
-
 
 //* canSum memoization
 //? O(m * n) timne
@@ -43,10 +43,10 @@ const canSum2 = (targetSum, numbers, memo = {}) => {
   memo[targetSum] = false;
   return false;
 };
-console.log('new function')
+console.log("new function");
 console.log(canSum2(7, [2, 3])); // true
 console.log(canSum2(7, [5, 3, 4, 7])); // true
 console.log(canSum2(7, [2, 4])); // false
 console.log(canSum2(8, [2, 3, 5])); // true
 console.log(canSum2(-7, [2, 4])); // false
-console.log(canSum2(300, [7, 14])); // false however to large for this implementation
+console.log(canSum2(300, [7, 14])); // false
