@@ -1,3 +1,4 @@
+//* brute force solution
 const canSum = (targetSum, numbers) => {
   if (targetSum === 0) return true;
   if (targetSum < 0) return false;
@@ -11,10 +12,11 @@ const canSum = (targetSum, numbers) => {
   return false;
 };
 
-console.log(canSum(7, [2, 3, 6]));
-console.log(canSum(7, [2, 4, 6]));
-//console.log(canSum(300, [7, 14]));
+console.log(canSum(7, [2, 3, 6])); // true
+console.log(canSum(7, [2, 4, 6])); // false
+//console.log(canSum(300, [7, 14])); // false
 
+//* solution using memoization
 const canSumBetter = function(targetSum, numbers, memo = {}) {
   if (targetSum in memo) return memo[targetSum];
   if (targetSum === 0) return true;
@@ -31,6 +33,6 @@ const canSumBetter = function(targetSum, numbers, memo = {}) {
   return false;
 };
 
-console.log(canSumBetter(7, [2, 3, 6]));
-console.log(canSumBetter(7, [2, 4, 6]));
-console.log(canSumBetter(300, [7, 14]));
+console.log(canSumBetter(7, [2, 3, 6])); //true
+console.log(canSumBetter(7, [2, 4, 6])); // false
+console.log(canSumBetter(300, [7, 14])); // false

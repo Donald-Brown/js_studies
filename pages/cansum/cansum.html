@@ -9,12 +9,65 @@
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-coy.min.css">
   <link rel="stylesheet" href="cansum.css">
-  <title>Solving Fibonacci - Memoization</title>
+  <title>Solving canSum - Memoization</title>
 </head>
   <body>
     <h1>Solving canSum with an acceptable time complexity.</h1>
-    
-    
+    <p>
+      write a function `canSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments.
+    </p>
+    <p>
+      The function should return a boolean indicating whether or not it is possible to generate the targetSum using numbers from the array.
+    </p>
+    <p>
+      You may use an element of the array as many times as needed.
+    </p>
+    <p>
+      You may assume that all input numbers are nonnegative.
+    </p>
+    <p>
+      As with the other memoization problems it is best to draw this out and look at it visually.
+    </p>
+    <pre><code class="lang-js">
+//* brute force solution
+const canSum = (targetSum, numbers) => {
+  if (targetSum === 0) return true;
+  if (targetSum < 0) return false;
+
+  for (let num of numbers) {
+    let remainder = targetSum - num;
+    if (canSum(remainder, numbers) === true) {
+      return true;
+    }
+  }
+  return false;
+};
+
+console.log(canSum(7, [2, 3, 6])); // true
+console.log(canSum(7, [2, 4, 6])); // false
+//console.log(canSum(300, [7, 14])); // false
+
+//* solution using memoization
+const canSumBetter = function(targetSum, numbers, memo = {}) {
+  if (targetSum in memo) return memo[targetSum];
+  if (targetSum === 0) return true;
+  if (targetSum < 0) return false;
+  
+  for (let num of numbers) {
+    let remainder = targetSum - num;
+    if (canSumBetter(remainder, numbers, memo) === true) {
+      memo[targetSum] = true;
+      return true;
+    }
+  }
+  memo[targetSum] = false;
+  return false;
+};
+
+console.log(canSumBetter(7, [2, 3, 6])); //true
+console.log(canSumBetter(7, [2, 4, 6])); // false
+console.log(canSumBetter(300, [7, 14])); // false
+    </code></pre>
     <footer>
         <p>by: Donald Brown</p>
     </footer>
