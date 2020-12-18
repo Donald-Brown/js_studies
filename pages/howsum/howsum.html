@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="How to solve Fibonacci">
+  <meta name="keywords" content="JavaScript, canSum, memoization, dynamic, dynamic programming, big o">
+  <meta name="author" content="Donald Brown">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-coy.min.css">
+  <link rel="stylesheet" href="howsum.css">
+  <title>Solving canSum - Memoization</title>
+</head>
+  <body>
+    <h1>Solving howSum with an acceptable time complexity.</h1>
+    <p>
+      Write a function `howSum(targetsSum, numbers)` that takes in a targetSum and an array of numbers as arguments.
+    </p>
+    <p>
+      the function should return an array containing a combination of elements that add up to exactly the targetSum. If there is no combination that adds up to the targetSum, then return null.
+    </p>
+    <p>
+      If there are multiple combinations possible, you may return any single one.
+    </p>
+    <pre><code class="lang-js">
+//* brute force solution
+const howSum = (targetSum, numbers) => {
+  if (targetSum === 0) return [];
+  if (targetSum < 0) return null;
+
+  for (let num of numbers) {
+    let remainder = targetSum - num;
+    let remainderResult = howSum(remainder, numbers);
+    if (remainderResult !== null) {
+      return [...remainderResult, num];
+    }
+  }
+
+  return null;
+}
+
+console.log(howSum(7, [2, 3])); //? [3, 2, 2]
+console.log(howSum(7, [5, 3, 4, 7])); //? [4, 3]
+console.log(howSum(7, [2, 4])); //? null
+console.log(howSum(8, [2, 3, 5])); //? [2, 2, 2, 2]
+//console.log(howSum(300, [7, 14])); //? null - to large for the solution
+
+//* A better solution for howSum
+const howSumBetter = (targetSum, numbers, memo = {}) => {
+  if (targetSum in memo) return memo[targetSum];
+  if (targetSum === 0) return [];
+  if (targetSum < 0) return null;
+
+  for (let num of numbers) {
+    let remainder = targetSum - num;
+    let remainderResult = howSumBetter(remainder, numbers, memo);
+    if (remainderResult !== null) {
+      memo[targetSum] = [...remainderResult, num];
+      return memo[targetSum];
+    }
+  }
+
+  memo[targetSum] = null;
+  return null;
+}
+
+console.log(howSumBetter(7, [2, 3])); //? [3, 2, 2]
+console.log(howSumBetter(7, [5, 3, 4, 7])); //? [4, 3]
+console.log(howSumBetter(7, [2, 4])); //? null
+console.log(howSumBetter(8, [2, 3, 5])); //? [2, 2, 2, 2]
+console.log(howSumBetter(300, [7, 14])); //? null
+      
+    </code></pre>
+    <footer>
+        <p>by: Donald Brown</p>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/prism.min.js"></script>
+    <script src="howsum.js"></script>
+  </body>
+</html>
